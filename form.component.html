@@ -1,0 +1,27 @@
+<form name='myform1' #form='ngForm' (ngSubmit)='form.valid && onSubmit()'>
+  <div class="form-group">
+    <label for='UserName'>User Name</label>
+    <input type='text' 
+           id='UserName'
+           name='UserName'
+           class='form-control'
+           #tvTxtUserName='ngModel'
+           (change)='log(tvTxtUserName)'
+           [(ngModel)]='model.userName'
+           required
+           minlength="3"
+           maxlength="10"/>
+    <div class='alert alert-danger'
+         *ngIf='tvTxtUserName.invalid && tvTxtUserName.touched'>
+        <div *ngIf='tvTxtUserName.errors.required'>User Name is Mandatory</div>
+        <div *ngIf='tvTxtUserName.errors.minlength'>User Name should atleast have 3 characters</div>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label for='Comment'>Comments</label>
+    <textarea id='Comment'
+              name='Comment'
+              class='form-control'></textarea>
+  </div>
+  <button class='btn btn-primary' [disabled]='!form.valid'>Submit</button>
+</form>
